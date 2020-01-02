@@ -33,12 +33,7 @@ class _AddPlaceFormState extends State<AddPlaceForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData(
-        primaryColor: cor,
-        // hintColor: Colors.yellow
-      ),
-      child: Column(
+    return Column(
       children: <Widget>[
         Container(
           width: 300,
@@ -65,7 +60,6 @@ class _AddPlaceFormState extends State<AddPlaceForm> {
           ),
         )
       ], 
-    ),
     );
   }
 }

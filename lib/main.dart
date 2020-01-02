@@ -3,17 +3,14 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
 import 'package:list_redux/store/place/AppState.dart';
-import 'package:list_redux/store/place/reducers.dart';
+import 'package:list_redux/store/store.dart' as providerstore;
 
 import './pages/Home.dart';
 
 final cor = Colors.purple;
 
 void main() {
-  final _initialState = AppState(places: []);
-  final Store<AppState> _store = Store<AppState>(reducer, initialState: _initialState);
-
-  runApp(MyApp(store: _store));
+  runApp(MyApp(store: providerstore.store));
 }
 
 class MyApp extends StatelessWidget {
@@ -26,6 +23,11 @@ class MyApp extends StatelessWidget {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
+        title: 'Redux and Flutter',
+        theme: ThemeData(
+          accentColor: cor,
+          primaryColor: cor
+        ),
         initialRoute: '/',
         routes: {
           '/': (context) => Home(),

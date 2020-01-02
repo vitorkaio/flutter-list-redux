@@ -24,7 +24,7 @@ class AddPlace extends StatefulWidget {
 class _AddPlaceState extends State<AddPlace> {
 
   void addPlaceHandler(value) {
-    StoreProvider.of<AppState>(context).dispatch(AddPlaceAction(value));
+    StoreProvider.of<AppState>(context).dispatch(AddPlaceActionRequest(value));
   }
 
   @override
@@ -37,11 +37,25 @@ class _AddPlaceState extends State<AddPlace> {
       body: StoreConnector<AppState, AppState> (
         converter: (store) => store.state,
         builder: (context, state) { 
+          print('value - ${state.loadingPlaces}');
           return Container(
             width: double.infinity,
             height: double.infinity,
             color: Colors.grey[80],
-            child: Column(
+            child: state.loadingPlaces
+            ?
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Adicionando Lugar'),
+                Container(
+                  margin: EdgeInsets.only(top: 15),
+                  child: CircularProgressIndicator(),
+                )
+              ],
+            )
+            :
+            Column(
               children: <Widget>[
                 Expanded(
                   child: svgIcon,
@@ -51,12 +65,25 @@ class _AddPlaceState extends State<AddPlace> {
                   child: Container(
                     child: AddPlaceForm(this.addPlaceHandler),
                   )
-                )
+                ),
               ],
             )
           );
         }
       ),
+    );
+  }
+  void showMyDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Adicionando Lugar...'),
+          content: Icon(
+            Icons.autorenew
+          ),
+        );
+      },
     );
   }
 }

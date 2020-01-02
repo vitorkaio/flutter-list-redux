@@ -1,8 +1,17 @@
 
 /// Actions with Payload
-class AddPlaceAction {
+class AddPlaceActionRequest {
   final String payload;
-  AddPlaceAction(this.payload);
+  AddPlaceActionRequest(this.payload);
+}
+
+class AddPlaceActionSuccess {
+  final String payload;
+  AddPlaceActionSuccess(this.payload);
+}
+
+class AddPlaceActionError {
+  AddPlaceActionError();
 }
 
 class RemovePlaceAction {

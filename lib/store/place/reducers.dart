@@ -11,9 +11,23 @@ AppState reducer(AppState prevState, dynamic action) {
     default:
   } */
 
-  if (action is AddPlaceAction) {
-    newState.places.add(action.payload);  
-  } else if (action is RemovePlaceAction) {
+  if (action is AddPlaceActionRequest) {
+    newState.loadingPlaces = true;
+    newState.errorPlaces = false;
+  } 
+
+  else if (action is AddPlaceActionSuccess) {
+    newState.places.add(action.payload);
+    newState.loadingPlaces = false;
+    newState.errorPlaces = false;
+  }
+
+  else if (action is AddPlaceActionError) {
+    newState.loadingPlaces = false;
+    newState.errorPlaces = true;
+  }
+  
+  else if (action is RemovePlaceAction) {
     newState.places.remove(action.payload);
   }
   /* else if (action is Bold) {
